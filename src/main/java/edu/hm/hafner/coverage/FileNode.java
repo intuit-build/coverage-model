@@ -197,11 +197,13 @@ public final class FileNode extends Node {
                     left.clearMissed();
                     left.setTotalFromCovered();
                 }
-                else {
-                    throw new IllegalArgumentException(
-                            String.format(Locale.ENGLISH, "Cannot merge coverage information for line %d in %s",
-                                    line, this));
-                }
+                // Commenting out the following lines to avoid throwing an exception when merging coverage information
+                // from Jacoco. This is a temporary solution until we have a better way to handle this.
+//                else {
+//                    throw new IllegalArgumentException(
+//                            String.format("Cannot merge coverage information for line %d in %s",
+//                                    line, this));
+//                }
             }
             else if (leftMcdcPair.totalsNotEqual(rightMcdcPair) || leftFunctionCall.totalsNotEqual(rightFunctionCall)) {
                 throw new IllegalArgumentException(

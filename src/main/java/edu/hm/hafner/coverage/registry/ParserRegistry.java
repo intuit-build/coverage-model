@@ -1,18 +1,10 @@
 package edu.hm.hafner.coverage.registry;
 
+import edu.hm.hafner.coverage.parser.*;
 import org.apache.commons.lang3.StringUtils;
 
 import edu.hm.hafner.coverage.CoverageParser;
 import edu.hm.hafner.coverage.CoverageParser.ProcessingMode;
-import edu.hm.hafner.coverage.parser.CoberturaParser;
-import edu.hm.hafner.coverage.parser.JacocoParser;
-import edu.hm.hafner.coverage.parser.JunitParser;
-import edu.hm.hafner.coverage.parser.MetricsParser;
-import edu.hm.hafner.coverage.parser.NunitParser;
-import edu.hm.hafner.coverage.parser.OpenCoverParser;
-import edu.hm.hafner.coverage.parser.PitestParser;
-import edu.hm.hafner.coverage.parser.VectorCastParser;
-import edu.hm.hafner.coverage.parser.XunitParser;
 
 /**
  * Provides a registry for all available {@link CoverageParserType parsers}.
@@ -30,7 +22,9 @@ public class ParserRegistry {
         JUNIT,
         VECTORCAST,
         XUNIT,
-        METRICS
+        METRICS,
+        GOCOV,
+        CLOVER
     }
 
     /**
@@ -74,6 +68,8 @@ public class ParserRegistry {
             case XUNIT -> new XunitParser(processingMode);
             case VECTORCAST -> new VectorCastParser(processingMode);
             case METRICS -> new MetricsParser(processingMode);
+            case GOCOV -> new GoParser(processingMode);
+            case CLOVER -> new CloverParser(processingMode);
         };
     }
 }
